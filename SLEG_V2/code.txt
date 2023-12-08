@@ -101,11 +101,9 @@ void setup() {
   // Initialize the Pixycam
   Serial.println("Init PixyCam...");
   pixy.init();
-  pixy.setLamp(0, 0);
+  pixy.setLamp(0, 1);
   delay(500);
   pixy.setLamp(1, 1);
-  delay(1500);
-  pixy.setLamp(0, 0);
   // change to the line_tracking program.  Note, changeProg can use partial strings, so for example,
   // you can change to the line_tracking program by calling changeProg("line") instead of the whole
   // string changeProg("line_tracking")
@@ -137,7 +135,7 @@ void loop() {
 #endif
 }
 void update_pixycam() {
-  const int delta_x_threshold = 6;//in pixel
+  const delta_x_threshold = 6;//in pixel
   // pixy.line.getMainFeatures(); // sollte man nicht benutzen weil es nur die Vectoren holt
   pixy.line.getAllFeatures();  //diese holt alle Features also auch die linien
 
@@ -176,7 +174,6 @@ void update_pixycam() {
   // ymid /= pixy.line.numVectors * 2;
 
   oberleitung_x = xmid;
-  Serial.println((String) xmid);
 }
 void follow_line() {
   if (oberleitung_x < 70 && oberleitung_x > 7) {
